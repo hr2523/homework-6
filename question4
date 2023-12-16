@@ -1,0 +1,108 @@
+def chinese_character_to_arabic_number(character):
+    if character == '一':
+        return 1
+    elif character == '二':
+        return 2
+    elif character == '三':
+        return 3
+    elif character == '四':
+        return 4
+    elif character == '五':
+        return 5
+    elif character == '六':
+        return 6
+    elif character == '七':
+        return 7
+    elif character == '八':
+        return 8
+    elif character == '九':
+        return 9
+    elif character == '十':
+        return 10
+    elif character == '百':
+        return 100
+    elif character == '千':
+        return 1000
+    elif character == '万':
+        return 10000
+    elif character == '亿':
+        return 100000000
+    elif character == '兆':
+        return 1000000000000
+
+
+def chinese_to_list(chinese_number):
+    result = []
+    for char in chinese_number:
+        result.append(chinese_character_to_arabic_number(char))
+    print(result)
+    return result
+
+
+def arabic_combine(chinese_list):
+    result = 0
+    hold = 0
+    multiplied_list = []
+    added_list = []
+    add_hold = 0
+    multi_hold = 1
+    second_multiplied_list = []
+    result = 0
+
+    for num in chinese_list:
+        if num < 10000:
+            if num < 10:
+                hold = num
+            else:
+                multiplied_list.append(hold * num)
+                hold = 0
+        else:
+            if hold != 0:
+                multiplied_list.append(hold)
+            multiplied_list.append(num)
+    multiplied_list.append(num)
+    print(multiplied_list)
+
+
+    for num in multiplied_list:
+        if num < 10000:
+            add_hold += num
+        else:
+            added_list.append(add_hold)
+            added_list.append(num)
+            add_hold = 0
+    added_list.append(add_hold)
+    print(added_list)
+
+    for num in added_list:
+        if num < 10000 and not 0:
+            multi_hold = num
+        elif num == 0:
+            multi_hold = 1
+        elif num >= 10000:
+            second_multiplied_list.append(multi_hold * num)
+    second_multiplied_list.append(multi_hold)
+    print(second_multiplied_list)
+
+    for num in second_multiplied_list:
+        result += num
+
+    return result
+
+
+def conversion(list_of_chinese_strings):
+    result = ""
+    for number in list_of_chinese_strings:
+        conversion = chinese_to_list(number)
+        arabic_number = arabic_combine(conversion)
+        formatted_number = f"{arabic_number:,}"
+        result += str(formatted_number) + "; "
+
+    return result
+
+
+# Example usage:
+sample_chinese_number_strings = ['九万二千三百二十一', '九千二百万二千三百二十一', '九亿八千万四百八十一']
+
+result = conversion(sample_chinese_number_strings)
+print(result)
