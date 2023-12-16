@@ -1,0 +1,27 @@
+def add_ing(string):
+    if (len(string) > 2 and string[-1] not in ['a', 'e', 'i', 'o', 'u'] and
+            string[-2] in ['a', 'e', 'i', 'o', 'u'] and
+            string[-3] not in ['a', 'e', 'i', 'o', 'u']):
+        print(string + string[-1] + 'ing')
+    elif (len(string) > 2 and string[-1] in ['a', 'e', 'i', 'o', 'u'] and
+          string[-2] not in ['a', 'e', 'i', 'o', 'u'] and
+          string[-3] in ['a', 'e', 'i', 'o', 'u']):
+        slice_string = slice(0, len(string) - 1)
+        print(string[slice_string] + 'ing')
+    elif (len(string) > 2 and string[-1] in ['a', 'e', 'i', 'o', 'u'] and
+          string[-2] in ['a', 'e', 'i', 'o', 'u'] and
+          string[-3] not in ['a', 'e', 'i', 'o', 'u']):
+        print(string + 'ing')
+    elif (len(string) > 2 and string[-1] not in ['a', 'e', 'i', 'o', 'u'] and
+          string[-2] not in ['a', 'e', 'i', 'o', 'u'] and
+          string[-3] in ['a', 'e', 'i', 'o', 'u']):
+        print(string + 'ing')
+    elif (len(string) == 2 and
+          string[-1] in ['a', 'e', 'i', 'o', 'u'] and
+          string[-2] not in ['a', 'e', 'i', 'o', 'u']):
+        print(string + 'ing')
+
+
+word = input('please input the word: ')
+word = word.lower()
+add_ing(word)
